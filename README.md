@@ -124,5 +124,5 @@ public class Startup
 Currently only 2 remoting transports are supported, `InMemoryTransport` (for testing purposes) and `ServiceBusTransport` (that's the Azure ServiceBus, btw), but if you want to contribute to expand the set of supported remoting transports (or open issues) you're really welcome.
 
 ## Installing via NuGet
-`Install-Package Polly`
+`Install-Package Asynco`
 
