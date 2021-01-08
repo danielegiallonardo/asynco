@@ -1,5 +1,5 @@
 # Asynco
-Asynco is a remoting framework for .Net5.x, whose aim is to create a sync wrapper over an async integration, by implementing a simple request/reply pattern over an heterogeneous set of remoting transports.
+Asynco is a remoting framework for .Net, whose aim is to create a sync wrapper over an async integration, by implementing a simple request/reply pattern over an heterogeneous set of remoting transports.
 
 Asynco was first created in order to seamlessly decouple various components and dependencies of a monolithic application, by splitting them into separate microservices and reducing the needed refactoring effort.
 
