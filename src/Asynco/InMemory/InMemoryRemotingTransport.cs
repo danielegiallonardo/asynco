@@ -36,7 +36,7 @@ namespace Asynco.InMemory
                 await requestsBlock.SendAsync(request);
                 return await repliesBlock.ReceiveAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             return null;
@@ -53,7 +53,7 @@ namespace Asynco.InMemory
                     await repliesBlock.SendAsync(reply);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }
