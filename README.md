@@ -117,7 +117,7 @@ public class Startup
 }
 ```
 
-...and that's it, your ready to go!!!
+...and that's it, you're ready to go!!!
 
 ## Remoting transports
 
