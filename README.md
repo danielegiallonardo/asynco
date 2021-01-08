@@ -123,6 +123,49 @@ public class Startup
 
 Currently only 2 remoting transports are supported, `InMemoryTransport` (for testing purposes) and `ServiceBusTransport` (that's the Azure ServiceBus, btw), but if you want to contribute to expand the set of supported remoting transports (or open issues) you're really welcome.
 
+### InMemory Transport
+This transport exists only for testing purposes (it's the one that is used in the unit tests), and it makes possible to use Asynco when the Sender and the Receiver are co-located in the same process, since it uses two shared TPL Dataflow's BufferBlocks for message passing. Just set it up by using 
+
+```csharp
+services.AddRemoting(options =>
+	options.UseInMemory())
+```
+
+and you're ready to go.
+
+### ServiceBus Transport
+This transport uses two Azure ServiceBus queues, one for the requests and one for the replies. The one for the requests must be set with Session=false, and on the other hand the one for the replies must be set with Session=true (since it's used to correlate a reply with its request). Just set it up by using
+
+```csharp
+services.AddRemoting(options =>
+	options.UseServiceBus(options =>
+	{
+		// This is used on the sender side, it's the DispatchProxy timeout 
+		options.Timeout = TimeSpan.FromMinutes(1); 
+		// This queue must have the setting Session=false
+		options.RequestsQueueName = "<asyncrequestsqueuename>";
+		// This queue must have the setting Session=true
+		options.RepliesQueueName = "<asyncrepliesqueuename>";
+		// You could specify a ConnectionString
+		options.ConnectionString = "<azureservicebusconnectionstring>",
+		// Or, alternatively, you could use these two options for the ManagedIdentity scenario
+		// (the Credential setting is optional, and the shown value it's the default one)
+		options.FullyQualifiedNamespace = "<AzureServiceBusFullyQualifiedNamespace>";
+		options.Credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
+		{
+			ExcludeAzureCliCredential = false,
+			ExcludeEnvironmentCredential = true,
+			ExcludeInteractiveBrowserCredential = true,
+			ExcludeManagedIdentityCredential = false,
+			ExcludeSharedTokenCacheCredential = true,
+			ExcludeVisualStudioCodeCredential = true,
+			ExcludeVisualStudioCredential = true
+		})
+	}))
+```
+
+More on this in the Samples.
+
 ## Installing via NuGet
 `Install-Package Asynco`
 
