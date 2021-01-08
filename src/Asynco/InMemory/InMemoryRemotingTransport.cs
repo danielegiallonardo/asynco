@@ -26,7 +26,7 @@ namespace Asynco.InMemory
             requestsBlock = new BufferBlock<RemoteRequest>();
             repliesBlock.Complete();
             repliesBlock = new BufferBlock<RemoteReply>();
-            return ValueTask.CompletedTask;
+            return default;
         }
 
         public async Task<RemoteReply> SendRequestAndWaitForReply(RemoteRequest request)
