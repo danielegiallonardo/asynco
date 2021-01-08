@@ -149,7 +149,8 @@ services.AddRemoting(options =>
 		// You could specify a ConnectionString
 		options.ConnectionString = "<azureservicebusconnectionstring>",
 		// Or, alternatively, you could use these two options for the ManagedIdentity scenario
-		// (the Credential setting is optional, and the shown value it's the default one)
+		// (the Credential setting is optional, and the shown value it's the default one,
+		// you could just specify the namespace and let the library do the rest)
 		options.FullyQualifiedNamespace = "<AzureServiceBusFullyQualifiedNamespace>";
 		options.Credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
 		{
