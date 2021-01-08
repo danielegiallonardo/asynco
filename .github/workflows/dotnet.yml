@@ -18,8 +18,8 @@ jobs:
       run: dotnet restore 
       working-directory: src/Asynco
     - name: Build
-      run: dotnet build --no-restore ./src/Asynco/Asynco.sln
+      run: dotnet build --no-restore 
       working-directory: src/Asynco
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/Asynco/Asynco.sln
+      run: dotnet test --no-build --verbosity normal 
       working-directory: src/Asynco
