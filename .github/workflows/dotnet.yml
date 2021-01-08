@@ -15,8 +15,11 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore ./src/Asynco/Asynco.sln
+      run: dotnet restore 
+      working-directory: src/Asynco
     - name: Build
       run: dotnet build --no-restore ./src/Asynco/Asynco.sln
+      working-directory: src/Asynco
     - name: Test
       run: dotnet test --no-build --verbosity normal ./src/Asynco/Asynco.sln
+      working-directory: src/Asynco
