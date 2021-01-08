@@ -81,7 +81,7 @@ public class Startup
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddScoped<IComponentA, ComponentA>();
-		.AddRemoting(options =>
+		services.AddRemoting(options =>
 			options.UseServiceBus(options =>
 			{
 				options.Timeout = TimeSpan.FromMinutes(1);
@@ -89,7 +89,7 @@ public class Startup
 				options.RepliesQueueName = "<asyncrepliesqueuename>";
 				options.FullyQualifiedNamespace = "<AzureServiceBusFullyQualifiedNamespace>";
 			}))
-			.AddRemotedService<IComponentB>()
+			.AddRemotedService<IComponentB>();
 		...
 	}
 }
