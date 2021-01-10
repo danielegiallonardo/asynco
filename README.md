@@ -121,7 +121,7 @@ public class Startup
 
 ## Remoting transports
 
-Currently only 2 remoting transports are supported, `InMemoryTransport` (for testing purposes) and `ServiceBusTransport` (that's the Azure ServiceBus, btw), but if you want to contribute to expand the set of supported remoting transports (or open issues) you're really welcome.
+Currently 3 remoting transports are supported, `InMemoryTransport` (for testing purposes), `ServiceBusTransport` (that's the Azure ServiceBus, btw), and `RabbitMQTransport`, but if you want to contribute to expand the set of supported remoting transports (or open issues) you're really welcome.
 
 ### InMemory Transport
 This transport exists only for testing purposes (it's the one that is used in the unit tests), and it makes possible to use Asynco when the Sender and the Receiver are co-located in the same process, since it uses two shared TPL Dataflow's BufferBlocks for message passing. Just set it up by using 
@@ -138,21 +138,21 @@ This transport uses two Azure ServiceBus queues, one for the requests and one fo
 
 ```csharp
 services.AddRemoting(options =>
-	options.UseServiceBus(options =>
+	options.UseServiceBus(opt =>
 	{
 		// This is used on the sender side, it's the DispatchProxy timeout 
-		options.Timeout = TimeSpan.FromMinutes(1); 
+		opt.Timeout = TimeSpan.FromMinutes(1); 
 		// This queue must have the setting Session=false
-		options.RequestsQueueName = "<asyncrequestsqueuename>";
+		opt.RequestsQueueName = "<asyncrequestsqueuename>";
 		// This queue must have the setting Session=true
-		options.RepliesQueueName = "<asyncrepliesqueuename>";
+		opt.RepliesQueueName = "<asyncrepliesqueuename>";
 		// You could specify a ConnectionString
-		options.ConnectionString = "<azureservicebusconnectionstring>",
+		opt.ConnectionString = "<azureservicebusconnectionstring>",
 		// Or, alternatively, you could use these two options for the ManagedIdentity scenario
 		// (the Credential setting is optional, and the shown value it's the default one,
 		// you could just specify the namespace and let the library do the rest)
-		options.FullyQualifiedNamespace = "<AzureServiceBusFullyQualifiedNamespace>";
-		options.Credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
+		opt.FullyQualifiedNamespace = "<AzureServiceBusFullyQualifiedNamespace>";
+		opt.Credential = new DefaultAzureCredential(new DefaultAzureCredentialOptions()
 		{
 			ExcludeAzureCliCredential = false,
 			ExcludeEnvironmentCredential = true,
@@ -165,7 +165,32 @@ services.AddRemoting(options =>
 	}))
 ```
 
-More on this in the Samples.
+### RabbitMQ Transport
+This transport uses two RabbitMQ queues, one for the requests and one for the replies. In order for the correlation between requests and replies to be achieved, it uses the direct reply-to mechanism as decribed [here](https://www.rabbitmq.com/direct-reply-to.html). Just set it up by using
+
+```csharp
+services.AddRemoting(options =>
+	options.UseRabbitMQ(opt =>
+	{
+		// This is used on the sender side, it's the DispatchProxy timeout 
+		opt.Timeout = TimeSpan.FromMinutes(1); 
+		opt.RequestsQueueName = "<asyncrequestsqueuename>";
+		opt.RepliesQueueName = "<asyncrepliesqueuename>";
+		opt.HostName = "localhost";
+		opt.UserName = "<username>";
+		opt.Password = "<password>";
+		// Optional, default is 5672
+		opt.Port = 5672;
+		// Optional, default is string empty
+		opt.Exchange = "";
+		// Optional, default is 1
+		opt.ConsumerDispatchConcurrency = 1;
+	}))
+```
+
+
+
+More on the remoting transports in the Samples.
 
 ## Installing via NuGet
 `Install-Package Asynco`
