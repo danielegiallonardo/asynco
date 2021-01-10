@@ -6,12 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Asynco" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Asynco.Samples.ServiceBus.Shared\Asynco.Samples.ServiceBus.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Asynco\Asynco.csproj" />
+    <ProjectReference Include="..\Asynco.Samples.RabbitMQ.Shared\Asynco.Samples.RabbitMQ.Shared.csproj" />
   </ItemGroup>
+
 
 </Project>
