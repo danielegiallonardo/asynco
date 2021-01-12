@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Description>Simple .NET remoting framework based on the Request/Reply pattern</Description>
+    <Description>RabbitMQ remoting transport for Asynco</Description>
     <Authors>Daniele Giallonardo</Authors>
     <Company>Asynco</Company>
     <Copyright>Copyright (c) 2021, Asynco</Copyright>
-    <AssemblyName>Asynco</AssemblyName>
-    <RootNamespace>Asynco</RootNamespace>
-    <PackageId>Asynco</PackageId>
+    <AssemblyName>Asynco.RabbitMQ</AssemblyName>
+    <RootNamespace>Asynco.RabbitMQ</RootNamespace>
+    <PackageId>Asynco.RabbitMQ</PackageId>
     <PackageTags>asynco;remoting;request;reply;microservices;servicebus;rpc;rabbitmq</PackageTags>
     <PackageProjectUrl>https://github.com/danielegiallonardo/asynco</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -22,10 +22,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
-    <PackageReference Include="System.Text.Json" Version="5.0.1" />
-    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="5.0.0" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Asynco\Asynco.csproj" />
+  </ItemGroup>
+
 
 </Project>

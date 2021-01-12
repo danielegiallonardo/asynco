@@ -11,7 +11,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Asynco\Asynco.csproj" />
+    <ProjectReference Include="..\..\..\Asynco.ServiceBus\Asynco.ServiceBus.csproj" />
     <ProjectReference Include="..\Asynco.Samples.ServiceBus.Shared\Asynco.Samples.ServiceBus.Shared.csproj" />
   </ItemGroup>
 

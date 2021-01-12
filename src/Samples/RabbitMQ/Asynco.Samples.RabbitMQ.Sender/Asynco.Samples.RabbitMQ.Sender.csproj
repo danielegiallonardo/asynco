@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Asynco\Asynco.csproj" />
+    <ProjectReference Include="..\..\..\Asynco.RabbitMQ\Asynco.RabbitMQ.csproj" />
     <ProjectReference Include="..\Asynco.Samples.RabbitMQ.Shared\Asynco.Samples.RabbitMQ.Shared.csproj" />
   </ItemGroup>
 
