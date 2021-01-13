@@ -55,7 +55,7 @@ class ComponentA : IComponentA
 }
 ```
 
-They seems quite the same, don't they? Well, they are....I'm not joking, you don't have to touch your Business Logic code at all!!!
+They seem quite the same, don't they? Well, they are....I'm not joking, you don't have to touch your Business Logic code at all!!!
 
 ## Getting started
 
@@ -135,7 +135,7 @@ and you're ready to go. More on the other remoting transports in the other repos
 
 ## Installing via NuGet
 `Install-Package Asynco`
-Anywai, you should not install the Asynco package directly, unless you're aiming to develop your own transport. 
+Anyway, you should not install the Asynco package directly, unless you're aiming to develop your own transport. 
 Use a specific transport package instead.
 
 
